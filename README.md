@@ -15,7 +15,31 @@ present under src/main/test folder.
 
 4. Files can be stored in the resources location
 
-5. Above command will also create class files and jar of the project which 
+Files can be of two types for present implementations csv and json .
+For exp: 
+
+orders.csv
+Order ID,amount,currency,comment
+1,100,USD,order payment
+2,123,EUR,order payment
+3,345.0
+
+orders.json (single json objects)
+{"orderId":5, "amount":1.23, "comment": "order payment"}
+
+orders1.csv
+Order ID,amount,currency,comment
+9,100,USD,order payment
+10,123,EUR,order payment
+11,345.0
+
+orders1.json (List of json objects)
+[{"orderId":6, "amount":1.23, "currency": "USD", "comment": "order payment"},
+{"orderId":7, "amount":1.24, "currency": "EUR", "comment": "order payment"}]
+
+Result would be as in Step 6
+
+6. Above command will also create class files and jar of the project which 
 can be used to execute the java code from the command line.
 
 
