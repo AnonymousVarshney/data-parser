@@ -1,5 +1,5 @@
-Following application is a command line application or script which parses a cron string and expands each field
-to show the times at which it will run.
+Following application is a command line application or script for parsing incoming data and converting the result 
+of the parsing into the resulting format.
 
 Pre-requisites :
 1. maven should be installed. Following article can be referred to setup maven :
@@ -13,41 +13,30 @@ mvn clean install
 This will build the project and execute all the underlying test cases that are 
 present under src/main/test folder.
 
-4. Above command will also create class files of the project which 
+4. Files can be stored in the resources location
+
+5. Above command will also create class files and jar of the project which 
 can be used to execute the java code from the command line.
 
-Go to target -> classes folder
-D:\data-parser>cd target
 
-D:\data-parser\target>cd classes
+D:\data-parser>java -jar target/data-parser-1.jar orders.csv orders1.csv orders.json orders1.json
+{"orderId":1,"id":1,"line":1,"filename":"orders.csv","amount":100.0,"currency":"USD","comment":"order payment","result":"OK"}
+{"orderId":2,"id":2,"line":2,"filename":"orders.csv","amount":123.0,"currency":"EUR","comment":"order payment","result":"OK"}
+{"orderId":3,"id":3,"line":3,"filename":"orders.csv","amount":345.0,"currency":null,"comment":null,"result":"error"}
+{"orderId":9,"id":9,"line":1,"filename":"orders1.csv","amount":100.0,"currency":"USD","comment":"order payment","result":"OK"}
+{"orderId":10,"id":10,"line":2,"filename":"orders1.csv","amount":123.0,"currency":"EUR","comment":"order payment","result":"OK"}
+{"orderId":11,"id":11,"line":3,"filename":"orders1.csv","amount":345.0,"currency":null,"comment":null,"result":"error"}
+{"orderId":5,"id":5,"line":1,"filename":"orders.json","amount":1.23,"currency":null,"comment":null,"result":"error"}
+{"orderId":6,"id":6,"line":1,"filename":"orders1.json","amount":1.23,"currency":"USD","comment":"order payment","result":"OK"}
+{"orderId":7,"id":7,"line":2,"filename":"orders1.json","amount":1.24,"currency":"EUR","comment":"order payment","result":"OK"}
 
-D:\data-parser\target\classes>java CronEvaluatorMainClass "0 9 2 11 * /usr/local/bin/yearly_backup"
-minute         0
-hour           9
-day of month   2
-month          11
-day of week    0 1 2 3 4 5 6
-command        /usr/local/bin/yearly_backup
-
-D:\data-parser\target\classes>
-
-5. This project can also be imported to Intellij as a maven project.
+6. This project can also be imported to Intellij as a maven project.
 File -> Project From Existing Sources -> Select Directory (select maven while importing)
 
-6. Right now only tests for main class and MinuteEvaluator are added , more test classes can be added similarly.
-
-7. if execution of code is to be done without the test cases ,following command can be executed in the main directory:
+7. If execution of code is to be done without the test cases ,following command can be executed in the main directory:
    D:\data-parser>mvn clean install -DskipTests
 
-8. Test reports are created under directory: \target\surefire-reports
+8. Project is structured in a way that the full implementation of the parser can be changed by writing another
+   implementation of DataParserInterface interface.
 
-9. Project is structured in a way that the full implementation of the evaluator can be changed by writing another
-   implementation of CronEvalutorInterface interface.
 
-10. Similarly implementation of parser of specific elements can be changed by writing implementations of ExpressionEvaluatorInterface
-    interface.
-
-java -cp target\data-parser-1.jar com.data.parser.DataParserMainClass orders.csv
-
-mvn clean package spring-boot:repackage
-java -jar target/data-parser-1.jar orders.csv orders1.csv orders.json orders1.json
